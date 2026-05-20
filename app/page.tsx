@@ -1,65 +1,97 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="bg-zinc-50 font-sans text-foreground dark:bg-black">
+      <div className="mx-auto w-full max-w-6xl px-6 py-14 sm:py-20">
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
+          <div className="space-y-6">
+            <p className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1 text-xs font-medium text-foreground/80 shadow-sm dark:border-white/10 dark:bg-white/5">
+              App Router • TypeScript • Tailwind
+            </p>
+            <h1 className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
+              Find the best flight in minutes.
+            </h1>
+            <p className="max-w-prose text-pretty text-base leading-7 text-foreground/70">
+              This starter is organized for a real booking flow: search, results,
+              traveler details, and checkout—plus account and trips.
+            </p>
+
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <a
+                className="inline-flex h-11 items-center justify-center rounded-full bg-foreground px-5 text-sm font-medium text-background hover:bg-foreground/90"
+                href="#search"
+              >
+                Start a search
+              </a>
+              <a
+                className="inline-flex h-11 items-center justify-center rounded-full border border-black/10 bg-white px-5 text-sm font-medium hover:bg-black/5 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10"
+                href="/docs"
+              >
+                Folder guide
+              </a>
+            </div>
+          </div>
+
+          <section
+            id="search"
+            className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <h2 className="text-lg font-semibold">Search flights</h2>
+            <p className="mt-1 text-sm text-foreground/70">
+              UI-only for now — wire to your API later via `services/`.
+            </p>
+
+            <form className="mt-6 grid gap-4 sm:grid-cols-2">
+              <label className="grid gap-1">
+                <span className="text-sm font-medium">From</span>
+                <input
+                  className="h-11 rounded-xl border border-black/10 bg-white px-3 text-sm outline-none ring-0 placeholder:text-foreground/40 focus:border-sky-500 dark:border-white/10 dark:bg-black/20"
+                  placeholder="DAC — Dhaka"
+                  name="from"
+                />
+              </label>
+              <label className="grid gap-1">
+                <span className="text-sm font-medium">To</span>
+                <input
+                  className="h-11 rounded-xl border border-black/10 bg-white px-3 text-sm outline-none ring-0 placeholder:text-foreground/40 focus:border-sky-500 dark:border-white/10 dark:bg-black/20"
+                  placeholder="DXB — Dubai"
+                  name="to"
+                />
+              </label>
+              <label className="grid gap-1">
+                <span className="text-sm font-medium">Depart</span>
+                <input
+                  className="h-11 rounded-xl border border-black/10 bg-white px-3 text-sm outline-none ring-0 focus:border-sky-500 dark:border-white/10 dark:bg-black/20"
+                  type="date"
+                  name="depart"
+                />
+              </label>
+              <label className="grid gap-1">
+                <span className="text-sm font-medium">Passengers</span>
+                <select
+                  className="h-11 rounded-xl border border-black/10 bg-white px-3 text-sm outline-none ring-0 focus:border-sky-500 dark:border-white/10 dark:bg-black/20"
+                  name="pax"
+                  defaultValue="1"
+                >
+                  <option value="1">1 passenger</option>
+                  <option value="2">2 passengers</option>
+                  <option value="3">3 passengers</option>
+                  <option value="4">4 passengers</option>
+                  <option value="5">5 passengers</option>
+                </select>
+              </label>
+
+              <div className="sm:col-span-2">
+                <button
+                  type="button"
+                  className="inline-flex h-11 w-full items-center justify-center rounded-xl bg-sky-600 px-5 text-sm font-semibold text-white hover:bg-sky-700"
+                >
+                  Search (placeholder)
+                </button>
+              </div>
+            </form>
+          </section>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

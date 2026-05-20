@@ -1,5 +1,40 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Folder structure (flight booking app)
+
+This repo is organized around a typical booking journey: **marketing → search → results → travelers → checkout**, plus **account/trips**.
+
+- **`app/`**: Next.js App Router routes, layouts, and route groups.
+  - **`app/layout.tsx`**: Root layout (header/footer) shared by all pages.
+  - **`app/page.tsx`**: Landing page (currently includes a placeholder flight search form).
+  - **`app/(marketing)/`**: Public, SEO-friendly pages that aren’t part of the checkout flow.
+    - **`about/`**, **`contact/`**: Example informational pages (add `page.tsx` later).
+  - **`app/(booking)/`**: The core flight booking funnel (route group does not affect the URL).
+    - **`search/`**: Search form and query parsing (origin/destination/date/pax).
+    - **`results/`**: Lists fares/itineraries; filters/sorting.
+    - **`travellers/`**: Passenger details (names, docs, SSR, baggage, seats).
+    - **`checkout/`**: Payment, confirmations, and final booking creation.
+  - **`app/(account)/`**: Signed-in user experiences.
+    - **`sign-in/`**, **`sign-up/`**: Authentication pages.
+    - **`trips/`**: Upcoming/past bookings and itinerary details.
+    - **`profile/`**: Traveler profile, saved passengers, preferences.
+
+- **`components/`**: Reusable React components used across routes.
+  - **`components/ui/`**: Generic UI building blocks (Button, Input, Card, Modal).
+  - **`components/booking/`**: Booking-domain components (FlightCard, FareBreakdown).
+  - **`components/account/`**: Account-domain components (TripCard, ProfileForm).
+
+- **`services/`**: API client wrappers (how the frontend talks to your backend/external providers).
+  - Example future modules: `flights.ts`, `airports.ts`, `bookings.ts`, `payments.ts`.
+
+- **`types/`**: Shared TypeScript types/interfaces (Flight, Airport, Booking, Passenger).
+
+- **`lib/`**: Cross-cutting utilities (date/price formatting, query helpers, fetch wrapper).
+
+- **`hooks/`**: Reusable React hooks (e.g. `useDebounce`, `useSearchParamsState`).
+
+- **`public/`**: Static assets served as-is (logos, icons, images).
+
 ## Getting Started
 
 First, run the development server:
