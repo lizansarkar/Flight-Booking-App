@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
+
+import { SupabaseSetupBanner } from "@/components/supabase-setup-banner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -28,6 +31,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <SupabaseSetupBanner />
         <header className="border-b border-black/10 bg-white/70 backdrop-blur dark:border-white/10 dark:bg-black/30">
           <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
             <div className="flex items-center gap-2">
@@ -44,18 +48,27 @@ export default function RootLayout({
               </div>
             </div>
             <nav className="flex items-center gap-4 text-sm text-foreground/80">
-              <a className="hover:text-foreground" href="#">
+              <Link className="hover:text-foreground" href="/">
                 Deals
-              </a>
-              <a className="hover:text-foreground" href="#">
-                My trips
-              </a>
-              <a
+              </Link>
+              <Link className="hover:text-foreground" href="/search">
+                Search
+              </Link>
+              <Link className="hover:text-foreground" href="/booking">
+                Booking
+              </Link>
+              <Link className="hover:text-foreground" href="/dashboard">
+                Dashboard
+              </Link>
+              <Link className="hover:text-foreground" href="/login">
+                Sign in
+              </Link>
+              <Link
                 className="rounded-full bg-foreground px-4 py-2 text-background hover:bg-foreground/90"
-                href="#search"
+                href="/search"
               >
                 Search flights
-              </a>
+              </Link>
             </nav>
           </div>
         </header>
