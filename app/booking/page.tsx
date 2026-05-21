@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { BookingStorePanel } from "@/components/booking/booking-store-panel";
 
+export const dynamic = "force-dynamic";
+
 /** Main booking flow lives at checkout; this page is for store testing. */
 export default function BookingPage() {
   return (
@@ -10,8 +12,8 @@ export default function BookingPage() {
         <div className="mb-8 space-y-2">
           <h1 className="text-3xl font-semibold tracking-tight">Booking</h1>
           <p className="text-sm text-foreground/70">
-            For a real booking: <strong>Search</strong> → <strong>Book</strong> →{" "}
-            <strong>Checkout</strong>. This page tests the Zustand store only.
+            For a real booking: <strong>Search</strong> → <strong>Book</strong>{" "}
+            → <strong>Checkout</strong>. This page tests the Zustand store only.
           </p>
         </div>
 
@@ -29,7 +31,10 @@ export default function BookingPage() {
         </section>
 
         <p className="mt-8 text-center text-sm text-foreground/50">
-          <Link className="text-sky-700 underline dark:text-sky-400" href="/search">
+          <Link
+            className="text-sky-700 underline dark:text-sky-400"
+            href="/search"
+          >
             ← Flight search
           </Link>
         </p>
