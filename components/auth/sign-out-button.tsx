@@ -23,7 +23,7 @@ export function SignOutButton() {
 
   return (
     <button
-      className="inline-flex h-10 items-center justify-center rounded-full border border-black/15 bg-transparent px-4 text-sm font-medium hover:bg-black/5 dark:border-white/20 dark:hover:bg-white/10"
+      className="inline-flex h-10 items-center justify-center rounded-full border border-black/15 bg-transparent px-4 text-sm font-medium hover:bg-black/5 dark:border-white/20 dark:hover:bg-white/10 text-white"
       disabled={loading}
       onClick={signOut}
       type="button"
