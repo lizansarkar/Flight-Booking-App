@@ -40,6 +40,10 @@ export async function createBooking(
     return { ok: false, error: "Passenger name and passport number are required." };
   }
 
+  if (!UUID_RE.test(input.flightId)) {
+    return { ok: false, error: "Invalid flight. Please search again and select a flight." };
+  }
+
   const supabase = await createClient();
   const {
     data: { user },

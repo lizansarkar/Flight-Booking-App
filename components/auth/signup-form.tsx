@@ -26,9 +26,15 @@ export function SignupForm() {
 
     try {
       const supabase = createClient();
+      const redirectTo =
+        typeof window !== "undefined"
+          ? `${window.location.origin}/login`
+          : undefined;
+
       const { data, error: signUpError } = await supabase.auth.signUp({
-        email,
+        email: email.trim(),
         password,
+        options: redirectTo ? { emailRedirectTo: redirectTo } : undefined,
       });
 
       if (signUpError) {
@@ -44,7 +50,7 @@ export function SignupForm() {
       }
 
       setInfo(
-        "Check your email to confirm your account before signing in (unless email confirmation is disabled in Supabase).",
+        "Account created. Check your email to confirm, then sign in. (If email confirmation is off in Supabase, use Sign in now.)",
       );
     } finally {
       setLoading(false);

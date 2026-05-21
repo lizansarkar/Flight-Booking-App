@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 
 import { submitBookingAction } from "@/app/booking/actions";
-import { rehydrateBookingStore, useBookingStore } from "@/stores/use-booking-store";
+import { usePersistHydrated } from "@/hooks/use-persist-hydrated";
+import { useBookingStore } from "@/stores/use-booking-store";
 
 const inputClass =
   "h-11 w-full rounded-xl border border-black/10 bg-white px-3 text-sm outline-none ring-0 placeholder:text-foreground/40 focus:border-sky-500 dark:border-white/10 dark:bg-black/20";
@@ -26,7 +27,7 @@ function formatDepart(iso: string): string {
 
 export function BookingCheckoutForm() {
   const router = useRouter();
-  const [hydrated, setHydrated] = useState(false);
+  const hydrated = usePersistHydrated();
   const [fullName, setFullName] = useState("");
   const [passportNumber, setPassportNumber] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -37,17 +38,6 @@ export function BookingCheckoutForm() {
   const passenger = useBookingStore((s) => s.passenger);
   const updatePassenger = useBookingStore((s) => s.updatePassenger);
   const resetBooking = useBookingStore((s) => s.resetBooking);
-
-  useEffect(() => {
-    rehydrateBookingStore();
-    setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (!hydrated) return;
-    setFullName(passenger?.full_name ?? "");
-    setPassportNumber(passenger?.passport_number ?? "");
-  }, [hydrated, passenger?.full_name, passenger?.passport_number]);
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -60,11 +50,14 @@ export function BookingCheckoutForm() {
 
     setLoading(true);
     try {
+      const name = (fullName || passenger?.full_name || "").trim();
+      const passport = (passportNumber || passenger?.passport_number || "").trim();
+
       const result = await submitBookingAction({
         flightId: selectedFlight.id,
         seatId: selectedSeat?.id ?? null,
-        fullName,
-        passportNumber,
+        fullName: name,
+        passportNumber: passport,
         totalPrice: Number(selectedFlight.base_price),
       });
 
@@ -143,7 +136,7 @@ export function BookingCheckoutForm() {
             }}
             placeholder="Jane Doe"
             required
-            value={fullName}
+            value={fullName || passenger?.full_name || ""}
           />
         </label>
         <label className="grid gap-1">
@@ -158,7 +151,7 @@ export function BookingCheckoutForm() {
             }}
             placeholder="AB1234567"
             required
-            value={passportNumber}
+            value={passportNumber || passenger?.passport_number || ""}
           />
         </label>
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import { SiteHeader } from "@/components/layout/site-header";
 import { SupabaseSetupBanner } from "@/components/supabase-setup-banner";
 import "./globals.css";
 
@@ -32,46 +32,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <SupabaseSetupBanner />
-        <header className="border-b border-black/10 bg-white/70 backdrop-blur dark:border-white/10 dark:bg-black/30">
-          <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
-            <div className="flex items-center gap-2">
-              <div className="grid h-9 w-9 place-items-center rounded-xl bg-sky-600 text-sm font-semibold text-white">
-                SB
-              </div>
-              <div className="leading-tight">
-                <div className="text-sm font-semibold text-foreground">
-                  SkyBooker
-                </div>
-                <div className="text-xs text-foreground/70">
-                  Flight booking starter
-                </div>
-              </div>
-            </div>
-            <nav className="flex items-center gap-4 text-sm text-foreground/80">
-              <Link className="hover:text-foreground" href="/">
-                Deals
-              </Link>
-              <Link className="hover:text-foreground" href="/search">
-                Search
-              </Link>
-              <Link className="hover:text-foreground" href="/booking">
-                Booking
-              </Link>
-              <Link className="hover:text-foreground" href="/dashboard">
-                Dashboard
-              </Link>
-              <Link className="hover:text-foreground" href="/login">
-                Sign in
-              </Link>
-              <Link
-                className="rounded-full bg-foreground px-4 py-2 text-background hover:bg-foreground/90"
-                href="/search"
-              >
-                Search flights
-              </Link>
-            </nav>
-          </div>
-        </header>
+        <SiteHeader />
 
         <main className="flex-1">{children}</main>
 

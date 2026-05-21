@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-import { rehydrateBookingStore, useBookingStore } from "@/stores/use-booking-store";
+import { usePersistHydrated } from "@/hooks/use-persist-hydrated";
+import { useBookingStore } from "@/stores/use-booking-store";
 import type { FlightRow } from "@/types/flight";
 
 const inputClass =
@@ -20,7 +19,7 @@ const demoFlight: FlightRow = {
 };
 
 export function BookingStorePanel() {
-  const [hydrated, setHydrated] = useState(false);
+  const hydrated = usePersistHydrated();
 
   const selectedFlight = useBookingStore((s) => s.selectedFlight);
   const selectedSeat = useBookingStore((s) => s.selectedSeat);
@@ -29,11 +28,6 @@ export function BookingStorePanel() {
   const setSelectedSeat = useBookingStore((s) => s.setSelectedSeat);
   const updatePassenger = useBookingStore((s) => s.updatePassenger);
   const resetBooking = useBookingStore((s) => s.resetBooking);
-
-  useEffect(() => {
-    rehydrateBookingStore();
-    setHydrated(true);
-  }, []);
 
   if (!hydrated) {
     return (

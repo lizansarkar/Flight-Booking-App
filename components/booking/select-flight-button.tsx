@@ -1,9 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-
-import { rehydrateBookingStore, useBookingStore } from "@/stores/use-booking-store";
+import { usePersistHydrated } from "@/hooks/use-persist-hydrated";
+import { useBookingStore } from "@/stores/use-booking-store";
 import type { FlightRow } from "@/types/flight";
 
 type SelectFlightButtonProps = {
@@ -12,14 +11,9 @@ type SelectFlightButtonProps = {
 
 export function SelectFlightButton({ flight }: SelectFlightButtonProps) {
   const router = useRouter();
-  const [ready, setReady] = useState(false);
+  const ready = usePersistHydrated();
   const setSelectedFlight = useBookingStore((s) => s.setSelectedFlight);
   const setSelectedSeat = useBookingStore((s) => s.setSelectedSeat);
-
-  useEffect(() => {
-    rehydrateBookingStore();
-    setReady(true);
-  }, []);
 
   function onSelect() {
     setSelectedFlight(flight);

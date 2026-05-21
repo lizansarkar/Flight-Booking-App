@@ -51,7 +51,8 @@ export default async function BookingConfirmationPage({
   } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect(`/login?next=/booking/confirmation?bookingId=${encodeURIComponent(bookingId)}`);
+    const nextPath = `/booking/confirmation?bookingId=${encodeURIComponent(bookingId)}${pnrFromUrl ? `&pnr=${encodeURIComponent(pnrFromUrl)}` : ""}`;
+    redirect(`/login?next=${encodeURIComponent(nextPath)}`);
   }
 
   const { data: booking, error } = await supabase

@@ -3,7 +3,7 @@
 
 create extension if not exists "pgcrypto";
 
--- FLIGHTS (public read; no RLS needed for this simple starter)
+-- FLIGHTS (public read for search)
 create table if not exists public.flights (
   id uuid primary key default gen_random_uuid(),
   flight_number text not null,
@@ -53,8 +53,21 @@ create table if not exists public.passengers (
 create index if not exists passengers_booking_id_idx on public.passengers(booking_id);
 
 -- ------------------------------------------------------------
--- RLS: users can only read/write their own bookings (and passengers)
+-- RLS: public read for catalog; users own their bookings
 -- ------------------------------------------------------------
+
+alter table public.flights enable row level security;
+drop policy if exists "flights_select_public" on public.flights;
+create policy "flights_select_public"
+on public.flights for select to anon, authenticated using (true);
+
+alter table public.seats enable row level security;
+drop policy if exists "seats_select_public" on public.seats;
+create policy "seats_select_public"
+on public.seats for select to anon, authenticated using (true);
+drop policy if exists "seats_update_authenticated" on public.seats;
+create policy "seats_update_authenticated"
+on public.seats for update to authenticated using (true) with check (true);
 
 alter table public.bookings enable row level security;
 alter table public.passengers enable row level security;

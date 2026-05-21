@@ -47,7 +47,7 @@ Dashboard → **SQL Editor** → New query → এক এক করে রান
 | ১ | `supabase/migrations/001_init.sql` |
 | ২ | `supabase/migrations/002_add_pnr.sql` |
 | ৩ (ঐচ্ছিক) | `supabase/seed_sample_flights.sql` |
-| ৪ (সমস্যা হলে) | `supabase/fix_rls_public_read.sql` |
+| ৪ (আগে 001 চালিয়েছ, search কাজ না) | `supabase/fix_rls_public_read.sql` |
 
 **চেক:** Table Editor → `flights`, `bookings`, `passengers`, `seats` দেখা যাচ্ছে কিনা।
 
