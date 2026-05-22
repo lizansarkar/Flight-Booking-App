@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Science_Gothic } from "next/font/google";
 
 import { SiteHeader } from "@/components/layout/site-header";
-import { SupabaseSetupBanner } from "@/components/supabase-setup-banner";
+// import { SupabaseSetupBanner } from "@/components/supabase-setup-banner";
 import "./globals.css";
 
 // 2. Science Gothic
@@ -41,7 +41,7 @@ export default function RootLayout({
 
         {/* Content Wrapper - Enforces entire viewport management */}
         <div className="relative z-10 flex min-h-screen flex-col w-full">
-          <SupabaseSetupBanner />
+          {/* <SupabaseSetupBanner /> */}
           
           <SiteHeader />
 
