@@ -1,4 +1,5 @@
 # SkyBooker — Flight Booking App
+Live Link: [https://flight-booking-app-tau.vercel.app]
 
 A frontend-focused technical assignment: a small flight search and booking experience built with Next.js and Supabase. The goal was to demonstrate a realistic user journey—search, select, sign in, enter passenger details, and confirm—while keeping scope manageable for an internship timeline.
 
